@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Active QBs</title>
+</head>
+<body>
+    <h1>Active QBs</h1>
+    <p>
+        {{ active_qbs|length }}
+    </p>
+    <dl>
+        {% for key, player in active_qbs.items %}
+            <dt>
+                {% if player.full_name %}
+                    {{ player.full_name }}
+                {% else %}
+                    {{ player.first_name }} {{ player.last_name }}
+                {% endif %}
+            </dt>
+            {% for field, value in player.items %}
+                {% if field != 'full_name' and field != 'first_name' and field != 'last_name' %}
+                    <dd>{{ field }}: {{ value }}</dd>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </dl>
+</body>
+</html>

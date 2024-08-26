@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Keeper Values</title>
+</head>
+<body>
+    <h1>Keeper Values</h1>
+    <p>Total projections: {{ ppr_projections|length }}</p>
+    <dl>
+        {% for key, projection in ppr_projections.items %}
+            <dt>
+                {% if projection.full_name %}
+                    {{ projection.full_name }}
+                {% else %}
+                    {{ projection.first_name }} {{ projection.last_name }}
+                {% endif %}
+                {% if projection.fantasy_positions %}
+                    - {{ projection.fantasy_positions|join:", " }}
+                {% endif %}
+            </dt>
+            {% for field, value in projection.items %}         
+                <dd>{{ field }}: {{ value }}</dd>
+            {% endfor %}
+        {% endfor %}
+    </dl>
+</body>
+</html>
