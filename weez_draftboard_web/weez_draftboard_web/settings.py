@@ -125,6 +125,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+     os.path.join(BASE_DIR, 'weez_draftboard_web/frontend/build/static'),  # React build files
 ]
 
 # Default primary key field type
