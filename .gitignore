@@ -7,7 +7,7 @@ env/
 .env
 
 # assets
-weez_draftboard_web/frontend/public/assets/player_images/
+frontend/public/assets/player_images/
 
 # Django
 *.log
