@@ -10,7 +10,6 @@ urlpatterns = [
     path('projections_ppr/', views.projections_ppr_view, name='projections_ppr'),
     path('draftboard/', views.draftboard_view, name='draftboard'),
     path('keeper_values/', views.keeper_value_view, name='keeper_values'),
-    path('', views.index, name='index'),
     path('api/projections_ppr/', views.api_projections_ppr, name='api_projections_ppr'),
     path('api/keeper_values/', views.api_keeper_values, name='api_keeper_values'),
     path('api/draftboard_player_pool/', views.api_draftboard_player_pool, name='api_draftboard'),
