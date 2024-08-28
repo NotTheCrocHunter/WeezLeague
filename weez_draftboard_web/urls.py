@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('draftboard.urls')),  # API URLs
     # Serve React frontend for any other route
-    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),  # Serve index.html for React frontend
+    re_path(r'^.*$', TemplateView.as_view(template_name='')),  # Serve index.html for React frontend
 ]

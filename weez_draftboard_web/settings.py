@@ -31,7 +31,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['weezleague.onrender.com', 'localhost', '127.0.0.1']
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'draftboard',
+    'weez_frontend',
 ]
 
 MIDDLEWARE = [
@@ -68,9 +69,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # os.path.join(BASE_DIR, 'templates'), 
-            os.path.join(BASE_DIR, 'frontend', 'build')
-            ],  # React build directory],
+            # os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'frontend', 'build', 'index.html')
+        ],  # React build directory],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,7 +134,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build', 'static')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
+    os.path.join(BASE_DIR, 'frontend/build'),
+    # os.path.join(BASE_DIR, 'weez_frontend/build')
+]
 print(STATICFILES_DIRS)
 
 # Default primary key field type
