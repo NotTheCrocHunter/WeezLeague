@@ -1,7 +1,7 @@
 //vimport Header from "../../components/Header";
-import DraftCell from "../draftboard/Draftboard";
-import React, { useMemo, useEffect, useState } from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+//import DraftCell from "../draftboard/Draftboard";
+import React, { useEffect, useState } from "react";
+import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 
@@ -9,8 +9,8 @@ function PlayersTable() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [data, setData] = useState([]);
-  const currentYear = new Date().getFullYear();
-  const draftID = "1115707228444524544"
+  //const currentYear = new Date().getFullYear();
+  //const draftID = "1115707228444524544"
 
   useEffect(() => {
     // Fetch the data from your API endpoint

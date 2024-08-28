@@ -8,8 +8,8 @@ import {
   Radio,
   Button,
   Drawer,
-  SwipeableDrawer,
-  Divider,
+  // SwipeableDrawer,
+  // Divider,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import DraftCell from "./DraftCell";
@@ -39,7 +39,7 @@ function Draftboard() {
 
   const connectLiveDraft = () => {
     const id = prompt("Please enter or paste your Sleeper Draft ID.");
- if (id) {
+    if (id) {
       //console.log("Sleeper Draft ID:", id);
       setDraftId(id); // Set the draft ID state
       localStorage.setItem("draftId", id); // Store the draft ID in localStorage
@@ -79,7 +79,7 @@ function Draftboard() {
     };
 
     fetchPlayerPool();
-  }, []); // Empty dependecy array ensures this runs only once
+  }, [liveDraftboard]); // Empty dependecy array ensures this runs only once
 
   const fetchDraftStatus = async (id) => {
     try {
@@ -117,31 +117,56 @@ function Draftboard() {
   useEffect(() => {
     if (!draftId) return; // Only run if draftId is set
 
-    const interval = setInterval(() => {
-      fetchDraftedPlayers(draftId);
-    }, 3000); // Fetch every 3 seconds
+    const handleIntervals = () => {
+      let intervalDuration;
 
-    // Initial fetch
-    fetchDraftedPlayers(draftId);
+      if (draftStatus === "drafting" || draftStatus === "paused") {
+          intervalDuration = 1000; // 1 second
+      } else if (draftStatus === "pre_draft") {
+          intervalDuration = 10000; // 10 seconds
+      } else if (draftStatus === "complete") {
+          clearInterval(statusInterval);
+          clearInterval(playersInterval);
+          return;
+      }
 
-    return () => clearInterval(interval);
-  }, [draftId]); // Dependency on draftId ensures the effect runs when draftId is set
+      if (draftStatus !== "complete") {
+          clearInterval(statusInterval);
+          clearInterval(playersInterval);
+
+          statusInterval = setInterval(() => fetchDraftStatus(draftId), intervalDuration);
+          playersInterval = setInterval(() => fetchDraftedPlayers(draftId), 3000);
+      }
+  };
+
+  let statusInterval = setInterval(() => fetchDraftStatus(draftId), 1000); // Start by checking status every 1 second
+  let playersInterval = setInterval(() => fetchDraftedPlayers(draftId), 3000); // Fetch drafted players every 3 seconds initially
+
+  fetchDraftStatus(draftId); // Initial fetch to set draftStatus
+
+  handleIntervals(); // Adjust intervals based on initial status
+
+  return () => {
+      clearInterval(statusInterval);
+      clearInterval(playersInterval);
+  };
+}, [draftId, draftStatus]); // Dependency on draftId ensures the effect runs when draftId is set
 
   // Hook/Function to insert the drafted players in the playerPool properly.
   useEffect(() => {
     if (playerPool.length > 0 && liveDraftboard.length > 0) {
-       // Step 1: get empty draftboard
-       let sortedData = [...liveDraftboard];
-       console.log('sortedData:', sortedData);
-       console.log('liveDraftboard:', liveDraftboard);
-       // Step 2: Remove all drafted players from the original data
-       const filteredData = playerPool.filter(
-         (player) =>
-           !draftedPlayers.some((draft) => draft.player_id === player.sleeper_id)
-       );
-       console.log("filtered_data:", filteredData);
+      // Step 1: get empty draftboard
+      let sortedData = [...liveDraftboard];
+      console.log("sortedData:", sortedData);
+      console.log("liveDraftboard:", liveDraftboard);
+      // Step 2: Remove all drafted players from the original data
+      const filteredData = playerPool.filter(
+        (player) =>
+          !draftedPlayers.some((draft) => draft.player_id === player.sleeper_id)
+      );
+      console.log("filtered_data:", filteredData);
 
-       // Sort data based on the selected sort option
+      // Sort data based on the selected sort option
       //let sortedData;
       if (sortOption === "live") {
         sortedData = liveDraftboard; // Live sort
@@ -178,7 +203,7 @@ function Draftboard() {
 
   const transformData = (data) => {
     const transformed = [];
-    console.log('transformData Start', data);
+    console.log("transformData Start", data);
     for (let i = 0; i < data.length; i += 12) {
       const round = Math.ceil((i + 1) / 12);
       const roundData = { round_id: round };
@@ -189,10 +214,9 @@ function Draftboard() {
       }
 
       roundPlayers.forEach((player, j) => {
-        roundData[`team${j + 1}`] =
-          player // && player.player
-            ? { ...player, round, draft_position: j + 1 }
-            : null;
+        roundData[`team${j + 1}`] = player // && player.player
+          ? { ...player, round, draft_position: j + 1 }
+          : null;
       });
 
       transformed.push(roundData);

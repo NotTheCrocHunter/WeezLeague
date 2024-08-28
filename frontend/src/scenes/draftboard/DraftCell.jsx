@@ -1,10 +1,9 @@
-import React, { useMemo, useEffect, useState } from "react";
-import { Box, Typography, IconButton, useTheme, Avatar } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, useTheme, } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import { DataGrid } from "@mui/x-data-grid";
+// import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import ArrowDirectionIcon from "./ArrowDirectionIcon"; // Adjust path as necessary
-import EmptyDraftCell from "./EmptyDraftCell";
 
 const positionColors = {
   RB: "rgba(143, 242, 202, 0.8)",

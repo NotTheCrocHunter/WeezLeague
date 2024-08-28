@@ -1,11 +1,11 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material"; //Typography
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
+//import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
+//import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
+//import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; //useMemo
 
 
 const KeeperValueTable = () => {
@@ -33,6 +33,24 @@ const KeeperValueTable = () => {
     {
       field: currentYear + "_keeper_value",
       headerName: currentYear + " Keeper Value",
+      flex: 0.5, 
+      sortable: true,
+      sortComparator: (v1, v2, cellParams1, cellParams2, order) => {
+        const parseValue = (value) => {
+          const parsed = parseInt(value, 10);
+          return isNaN(parsed) ? (order === 'asc' ? Infinity : -Infinity) : parsed;
+        };
+
+        const parsedV1 = parseValue(v1);
+        const parsedV2 = parseValue(v2);
+
+        return parsedV1 - parsedV2;
+      }
+    },
+    {
+      field: currentYear - 1 + "_draft_round",
+      headerName: currentYear - 1 + " Draft Round",
+      flex: 0.5, 
       sortable: true,
       sortComparator: (v1, v2, cellParams1, cellParams2, order) => {
         const parseValue = (value) => {
@@ -49,6 +67,7 @@ const KeeperValueTable = () => {
     {
       field: currentYear + "_keeper_round",
       headerName: currentYear + " Keeper Round",
+      flex: 0.5, 
       sortable: true,
       sortComparator: (v1, v2, cellParams1, cellParams2, order) => {
         const parseValue = (value) => {
@@ -65,6 +84,7 @@ const KeeperValueTable = () => {
     {
       field: currentYear + "_adp_ppr_round",
       headerName: currentYear + " ADP Round",
+      flex: 0.5, 
       sortable: true,
       sortComparator: (v1, v2, cellParams1, cellParams2, order) => {
         const parseValue = (value) => {
@@ -127,6 +147,7 @@ const KeeperValueTable = () => {
               columnVisibilityModel: {
                 // Hide columns for player ID, the other columns will remain visible
                 sleeper_id: false,
+                '2024_keeper_value': false,
               },
             },
           }}

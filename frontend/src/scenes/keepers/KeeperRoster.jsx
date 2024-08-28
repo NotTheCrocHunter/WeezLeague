@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 const KeeperRoster = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [data, setData] = useState([]);
   const [ filteredData, setFilteredData ] = useState([]);
   const { ownerId } = useParams();
   const currentYear = new Date().getFullYear();
@@ -18,7 +17,6 @@ const KeeperRoster = () => {
     fetch('http://localhost:8000/api/keeper_values/')
       .then(response => response.json())
       .then(data => {
-        setData(data);
         // Filter the data based on the owner_name
         const filtered = data.filter(item => item.owner_name === ownerId);
         setFilteredData(filtered);

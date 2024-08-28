@@ -6,16 +6,16 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+//import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
+//import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+//import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+//import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+//import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+//import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
+//import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+//import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import GridOnOutlinedIcon from "@mui/icons-material/GridOnOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -134,6 +134,13 @@ const Sidebar = ({ owners }) => {
             >
               Keepers
             </Typography>
+            <Item
+              title="All Keepers"
+              to="/keepers"
+              icon={<PeopleOutlinedIcon />} // You can replace with a relevant icon for teams
+              selected={selected}
+              setSelected={setSelected}
+            />
             {Object.entries(owners).map(([id, name]) => (
               <Item
                 key={id}
