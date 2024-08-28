@@ -16,11 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from django.views.generic import TemplateView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('draftboard.urls')),  # API URLs
-    # Serve React frontend for any other route
-    re_path(r'^.*$', TemplateView.as_view(template_name='')),  # Serve index.html for React frontend
+    path('', include('draftboard.urls')),  # API URLs  
 ]

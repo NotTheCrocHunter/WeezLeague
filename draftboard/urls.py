@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, re_path
+from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
@@ -17,5 +18,6 @@ urlpatterns = [
     path('api/all_players', views.api_all_players, name='api_all_players'),
     path('api/download-player-avatars/', views.download_player_avatars, name='download_player_avatars'),
     path('api/draft_lottery', views.api_draft_lottery, name='api_draft_lottery'),
-    path('api/owners', views.api_league_owners, name='api_league_owners')
+    path('api/owners', views.api_league_owners, name='api_league_owners'),
+    re_path(r'^.*$', TemplateView.as_view(template_name='')),  # Serve index.html for React frontend
 ]
