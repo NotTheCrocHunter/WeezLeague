@@ -6,7 +6,7 @@ function EmptyDraftCell({ playerData }) {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     
-    //console.log('PlayerData EmptyDraft', playerData)
+    console.log('PlayerData EmptyDraft', playerData)
   return (
     <Box
       className="cell-container"
