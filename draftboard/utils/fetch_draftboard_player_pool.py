@@ -59,5 +59,5 @@ def fetch_draftboard_player_pool():
         player['is_keeper'] = None
         player['round'] = None
         player['draft_slot'] = None
-    
-    return player_pool[:216]  # fpros_data, str(type(all_players)), year_projections # player_pool[:216]
+    print(f"Player Pool Length: {len(player_pool)}")
+    return player_pool  # fpros_data, str(type(all_players)), year_projections # player_pool[:216]

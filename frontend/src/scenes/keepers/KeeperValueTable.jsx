@@ -6,6 +6,7 @@ import { tokens } from "../../theme";
 //import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import React, { useEffect, useState } from 'react'; //useMemo
+import CustomDataGridToolbar from "../global/CustomDataGridToolbar"; 
 
 
 const KeeperValueTable = () => {
@@ -142,6 +143,7 @@ const KeeperValueTable = () => {
           rows={data} 
           columns={columns} 
           getRowId={(row) => row.sleeper_id}
+          slots={{ toolbar: CustomDataGridToolbar, }}
           initialState={{
             columns: {
               columnVisibilityModel: {

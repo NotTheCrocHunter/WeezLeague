@@ -14,7 +14,7 @@ function PlayersTable() {
 
   useEffect(() => {
     // Fetch the data from your API endpoint
-    fetch("http://localhost:8000/api/all_players")
+    fetch("http://localhost:8000/api/draftboard_player_pool/")
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -31,9 +31,9 @@ function PlayersTable() {
   }, []);
 
   const columns = [
-    { field: "player_id", headerName: "ID" },
+    { field: "sleeper_id", headerName: "ID" },
     {
-      field: "full_name",
+      field: "last_name",
       headerName: "Player",
       cellClassName: "name-column--cell",
       width: 200,
@@ -79,13 +79,13 @@ function PlayersTable() {
         checkboxSelection
         rows={data}
         columns={columns}
-        getRowId={(row) => row.player_id}
+        getRowId={(row) => row.sleeper_id}
         
         initialState={{
           columns: {
             columnVisibilityModel: {
               // Hide columns for player ID, the other columns will remain visible
-              player_id: true,
+              sleeper_id: true,
             },
           },
         }}

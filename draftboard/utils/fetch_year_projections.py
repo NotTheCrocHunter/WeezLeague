@@ -10,4 +10,5 @@ def fetch_year_projections():
     stats = Stats()
     # gets all NFL players in the Sleeper system
     year_projections = stats.get_all_projections(season_type='regular', season=2024)
+    
     return year_projections

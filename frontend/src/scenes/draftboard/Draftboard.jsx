@@ -15,6 +15,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import DraftCell from "./DraftCell";
 import { tokens } from "../../theme";
 import PlayersTable from "../global/PlayersTable";
+import CustomDataGridToolbar from "../global/CustomDataGridToolbar"; 
 
 function Draftboard() {
   const theme = useTheme();
@@ -25,7 +26,6 @@ function Draftboard() {
   const [liveDraftboard, setLiveDraftboard] = useState([]);
   const [draftboardPlayers, setDraftboardPlayers] = useState([]);
   const [sortOption, setSortOption] = useState("ecr"); // State for sorting option
-  //const [draftId, setDraftId] = useState("1128744967238803456");
   const [draftStatus, setDraftStatus] = useState(null);
   // Initialize state with the value from localStorage or default if not set
   const [draftId, setDraftId] = useState(() => {
@@ -335,6 +335,12 @@ function Draftboard() {
         getRowId={(row) => row.round_id}
         getRowHeight={() => "auto"}
         rowSelection="false"
+        slots={{ toolbar: CustomDataGridToolbar, }}
+        slotProps={{
+          toolbar: {
+            showQuickFilter: true,
+          },
+        }}
         sx={{
           "& .MuiDataGrid-cell": {
             padding: "1px", // Adjust padding if needed
@@ -346,7 +352,8 @@ function Draftboard() {
         }}
       />
       <Button onClick={toggleDrawer(true)}>Open drawer</Button>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <Drawer open={open} onClose={toggleDrawer(false)} anchor="bottom">
+        <PlayersTable />
         <PlayersTable />
       </Drawer>
     </Box>
